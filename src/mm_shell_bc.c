@@ -421,7 +421,14 @@ lub_static_pressure(double func[DIM],
     {
      load_lsi( ls->Length_Scale );
      load_lsi_derivs();
-     Hn = 1.0 - lsi->Hn;
+     if (lsi->near)
+       {
+        Hn = 1.0 - lsi->Hn;
+       }
+     else
+       {
+        Hn = 0.0;
+       }
     }
 
   /* Calculate F sensitivity */
