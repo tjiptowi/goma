@@ -1130,6 +1130,7 @@ struct Equation_Names EQ_Name[] = {
     { "R_EM_H3_IMAG", "EM_H3_IMAG", R_EM_H3_IMAG},/*   199  */
     { "R_EM_CONT_REAL", "EM_CONT_REAL", R_EM_CONT_REAL},/*   200  */
     { "R_EM_CONT_IMAG", "EM_CONT_IMAG", R_EM_CONT_IMAG},/*   201  */
+    { "R_POISSON", "POISSON", R_POISSON},/*   202  */
     /*
      *  Note -> these entries must remain until we get rid
      *          of putting the species unknowns after V_LAST
@@ -1419,6 +1420,7 @@ struct Equation_Names Var_Name[] =  {
     { "EM_H3_IMAG", "HIZ", EM_H3_IMAG},
     { "EM_CONT_REAL", "EPR", EM_CONT_REAL},
     { "EM_CONT_IMAG", "EPI", EM_CONT_IMAG},
+    { "POISSON", "U", POISSON},
 
     { "MESH_POSITION1", "X",  MESH_POSITION1 } ,
     { "MESH_POSITION2", "Y",  MESH_POSITION2 } ,	/* 201 */
@@ -1678,6 +1680,7 @@ struct Equation_Names Exo_Var_Names[] =
   { "Magnetic Field, Imaginary z-component", "HIZ", EM_H3_IMAG },
   { "lagrange mult em cont real", "EPR", EM_CONT_REAL },
   { "lagrange mult em cont imag", "EPI", EM_CONT_IMAG },
+  { "Poisson", "U", POISSON },
 };
 
 int Num_Exo_Var_Names = sizeof(Exo_Var_Names) / sizeof(struct Equation_Names);  
@@ -1969,6 +1972,7 @@ struct Equation_Names Var_Units[] =
   { "Magnetic Field, Imaginary z-component", "H3I", EM_H3_IMAG },
   { "lagrange mult em cont real", "EPR", EM_CONT_REAL },
   { "lagrange mult em cont imag", "EPI", EM_CONT_IMAG },
+  { "Poisson", "[1]", POISSON },
 };
 
 int Num_Var_Units = sizeof(Var_Units) / sizeof(struct Equation_Names);  

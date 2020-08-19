@@ -310,6 +310,7 @@ variable_string_to_int(const char *input, const char *err_string)
   else if (!strcmp(input, "VELOCITY2"))                   var = VELOCITY2;
   else if (!strcmp(input, "VELOCITY3"))                   var = VELOCITY3;
   else if (!strcmp(input, "TEMPERATURE"))                 var = TEMPERATURE;
+  else if (!strcmp(input, "POISSON"))                     var = POISSON;
   else if (!strcmp(input, "MASS_FRACTION"))               var = MASS_FRACTION;
   else if (!strcmp(input, "MESH_DISPLACEMENT1"))          var = MESH_DISPLACEMENT1;
   else if (!strcmp(input, "MESH_DISPLACEMENT2"))          var = MESH_DISPLACEMENT2;

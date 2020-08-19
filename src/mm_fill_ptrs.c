@@ -1493,6 +1493,11 @@ load_elem_dofptr(const int ielem,
     load_varType_Interpolation_ptrs(eqn, esp->T, esp_old->T, esp_dot->T);
   }
 
+  eqn = R_POISSON;
+  if (upd->ep[eqn] >= 0) {
+    load_varType_Interpolation_ptrs(eqn, esp->u, esp_old->u, esp_dot->u);
+  }
+
   eqn = R_POTENTIAL;
   if (upd->ep[eqn] >= 0) {
     load_varType_Interpolation_ptrs(eqn, esp->V, esp_old->V, esp_dot->V);

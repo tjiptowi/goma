@@ -8003,6 +8003,8 @@ rd_eq_specs(FILE *ifp,
 
     if        (!strcasecmp(ts, "energy")) {
       ce = set_eqn(R_ENERGY, pd_ptr);
+    } else if (!strcasecmp(ts, "poisson")) {
+      ce = set_eqn(R_POISSON, pd_ptr);
     } else if (!strcasecmp(ts, "momentum1")) {
       ce = set_eqn(R_MOMENTUM1, pd_ptr);
     } else if (!strcasecmp(ts, "momentum2")) {
@@ -8658,6 +8660,8 @@ rd_eq_specs(FILE *ifp,
 
     if        (!strcasecmp(ts, "T")) {
       cv = set_var(TEMPERATURE, pd_ptr);
+    } else if (!strcasecmp(ts, "U")) {
+      cv = set_var(POISSON, pd_ptr);
     } else if (!strcasecmp(ts, "U1")) {
       cv = set_var(VELOCITY1, pd_ptr);
     } else if (!strcasecmp(ts, "U2")) {
@@ -9414,6 +9418,7 @@ rd_eq_specs(FILE *ifp,
     case R_CURVATURE:
     case R_LUBP:
     case R_LUBP_2:
+    case R_POISSON:
         if ( fscanf(ifp, "%lf %lf %lf", 
                     &(pd_ptr->etm[ce][(LOG2_BOUNDARY)]),
                     &(pd_ptr->etm[ce][(LOG2_DIFFUSION)]),

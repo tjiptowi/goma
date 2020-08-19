@@ -522,6 +522,7 @@ MM_SRC= mm_as_alloc.c\
         mm_fill_species.c\
         mm_fill_stress.c\
         mm_fill_common.c\
+        mm_fill_poisson.c\
         mm_fill_terms.c\
         mm_fill_util.c\
         mm_flux.c\
@@ -567,6 +568,7 @@ MM_INC=	mm_as.h\
         mm_fill_em.h\
         mm_fill_fill.h\
         mm_fill_jac.h\
+        mm_fill_poisson.h\
         mm_fill_porous.h\
         mm_fill_potential.h\
         mm_fill_pthings.h\

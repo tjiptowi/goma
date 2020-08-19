@@ -52,6 +52,7 @@
 
 #include "mm_eh.h"
 #include "mm_fill_fill.h"
+#include "mm_fill_poisson.h"
 #include "mm_fill_stress.h"
 #include "mm_fill_shell.h"
 #include "mm_fill_em.h"
@@ -1925,6 +1926,16 @@ matrix_fill(
 	  if (err) return -1;
 #endif
 	}
+
+      if ( pde[R_POISSON] )
+	{
+	  err = assemble_poisson();
+	  EH( err, "assemble_poisson");
+#ifdef CHECK_FINITE
+	  err = CHECKFINITE("assemble_poisson"); 
+	  if (err) return -1;
+#endif
+        }
 
       if( pde[R_POR_SINK_MASS] )
 	{

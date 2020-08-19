@@ -547,6 +547,7 @@ struct Element_Variable_Pointers
   dbl *em_ei[DIM][MDE];				/* EMwave Electric Field imag part */
   dbl *em_hr[DIM][MDE];				/* EMwave Magnetic Field real part */
   dbl *em_hi[DIM][MDE];				/* EMwave Magnetic Field imag part */
+  dbl *u[MDE];					/* Poisson */
 };
 
 /*___________________________________________________________________________*/
@@ -660,6 +661,8 @@ struct Element_Stiffness_Pointers
   dbl ***em_ei;		      	 /* *em_xx[DIM][MDE], em_wave*/
   dbl ***em_hr;		      	 /* *em_xx[DIM][MDE], em_wave*/
   dbl ***em_hi;		      	 /* *em_xx[DIM][MDE], em_wave*/
+  dbl **u;			 /* *u[MDE], Poisson */
+
 
   /*
    * These are for debugging purposes...
@@ -1617,6 +1620,8 @@ struct Field_Variables
   dbl em_ei[DIM];		/* EM Electric Field Vector (imag)*/	
   dbl em_hr[DIM];		/* EM Magnetic Field Vector (real)*/	
   dbl em_hi[DIM];		/* EM Magnetic Field Vector (imag)*/	
+  dbl u;			/* Poisson */
+
 
   /*
    * Grads of scalars...
@@ -1657,6 +1662,7 @@ struct Field_Variables
   dbl grad_tfmp_pres[DIM];   /* Gradient of the thin-film multi-phase lubrication pressure */
   dbl grad_tfmp_sat[DIM];   /* Gradient of the thin-film multi-phase lubrication saturation */
   dbl grad_restime[DIM];   /* Gradient of the residence time function */
+  dbl grad_u[DIM];		/* Gradient of u. */
 
   /*
    * Grads of vectors...
@@ -1830,6 +1836,8 @@ struct Field_Variables
   dbl d_max_strain_dmesh[DIM][MDE];
   dbl d_cur_strain_dmesh[DIM][MDE];
   dbl d_grad_restime_dmesh[DIM] [DIM][MDE];
+  dbl d_grad_u_dmesh[DIM] [DIM][MDE];
+
  /*
   * Values at surfaces for integrated boundary conditions 
   */ 
@@ -1975,6 +1983,7 @@ struct Diet_Field_Variables
   dbl grad_em_ei[DIM][DIM];             /* EM wave Fields */
   dbl grad_em_hr[DIM][DIM];             /* EM wave Fields */
   dbl grad_em_hi[DIM][DIM];             /* EM wave Fields */
+  dbl u;			        /* Poisson */
   /*  
    * Grads of scalars... concentration is the only one we need in the
    * old form for VOF/Taylor-Galerkin stuff.
@@ -1992,6 +2001,8 @@ struct Diet_Field_Variables
   
   dbl grad_tfmp_pres[DIM];       /* Gradient of the thin-film multi-phase lubrication pressure */
   dbl grad_tfmp_sat[DIM];       /* Gradient of the thin-film multi-phase lubrication saturation */
+
+  dbl grad_u[DIM];              /* Gradient of poisson variable. */
 
   dbl grad_n[DIM][DIM];         /* Normal to level set function OR shell normal */
   dbl div_n;                    /* Divergence of LS normal field */

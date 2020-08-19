@@ -2322,6 +2322,11 @@ load_variable (double *x_var,        /* variable value */
       var = TEMPERATURE;
       *d_x_var = 1.;
       break;
+    case POISSON:
+      *x_var = fv->u;
+      var = POISSON;
+      *d_x_var = 1.;
+      break;
     case VOLTAGE:
       *x_var = fv->V;
       var = VOLTAGE;

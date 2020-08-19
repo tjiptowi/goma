@@ -7583,7 +7583,14 @@ load_fv(void)
       fv_old->T = 0.;
       fv_dot->T = 0.;
       } */
-  
+
+  if (pdv[POISSON]) {
+    v = POISSON;
+    scalar_fv_fill(esp->u, esp_dot->u, esp_old->u, bf[v]->phi, ei->dof[v],
+                   &(fv->u), &(fv_dot->u), &(fv_old->u));
+    stateVector[POISSON] = fv->u;
+  }
+
 
   /*
    * Fill...
@@ -9232,7 +9239,29 @@ load_fv_grads(void)
     {
       for (p=0; p<VIM; p++) fv->grad_T[p] = 0.0;
     }
-   
+
+
+  /*
+   * grad(u)
+   */
+  if (pd->v[POISSON])
+    {
+      v = POISSON;
+      for (p = 0; p < VIM; p++) fv->grad_u[p] = 0.0;
+      dofs  = ei->dof[v];
+      for (p = 0; p < VIM; p++)
+	{
+	  for (i = 0; i < dofs; i++)
+	    {
+	      fv->grad_u[p] += *esp->u[i] * bf[v]->grad_phi[i] [p];
+	    }
+	}
+    } 
+  else if (zero_unused_grads && upd->vp[POISSON] == -1 )
+    {
+      for (p=0; p<VIM; p++) fv->grad_u[p] = 0.0;
+    }
+
   /*
    * grad(P)
    */
@@ -12502,6 +12531,34 @@ if ( pd->v[RESTIME] )
       siz = sizeof(double)*DIM*DIM*MDE;
       memset(&(fv->d_grad_restime_dmesh[0][0][0]),0, siz);
     }  
+
+if ( pd->v[POISSON] )
+    {
+      v = POISSON;
+      bfv = bf[v];
+      vdofs  = ei->dof[v];
+      siz = sizeof(double)*DIM*DIM*MDE;
+      memset(&(fv->d_grad_u_dmesh[0][0][0]),0, siz);
+      for ( i=0; i<vdofs; i++)
+        {
+          T_i = *esp->u[i];
+          for (p = 0; p < dimNonSym; p++)
+            {
+              for (b = 0; b < dim; b++)
+                {
+                  for (j = 0; j < mdofs; j++)
+                    {
+                      fv->d_grad_u_dmesh[p] [b][j] +=
+                  T_i  *  bfv->d_grad_phi_dmesh[i][p] [b][j]; 
+                    }
+                }
+            }
+        }
+    } else   if ( upd->vp[POISSON] != -1  ){
+      siz = sizeof(double)*DIM*DIM*MDE;
+      memset(&(fv->d_grad_u_dmesh[0][0][0]),0, siz);
+    }
+
 
 if ( pd->v[SHELL_LUB_CURV] )
     {
