@@ -854,6 +854,7 @@
 #define VAR_CA_USER_BC             964000005
 #define CA_EDGE_CURVE_BC           964000006
 #define CA_EDGE_CURVE_INT_BC       964000007
+#define VAR_CA_MOM_BC              964000009
 #define SURFTANG_BC                964100000
 #define SURFTANG_SCALAR_BC         964110000
 #define CAP_ENDFORCE_BC            964100010

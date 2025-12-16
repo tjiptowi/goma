@@ -367,6 +367,7 @@ int apply_integrated_curve_bc(
           break;
 
         case VAR_CA_EDGE_BC:
+        case VAR_CA_MOM_BC:
         case VAR_CA_USER_BC:
 
           /* free surface normal and sensitivities.
@@ -386,7 +387,7 @@ int apply_integrated_curve_bc(
            * fixed wall - where the wall surface normal is known */
 
           for (p = 0; p < ielem_dim; p++) {
-            if (BC_Name == VAR_CA_EDGE_BC) {
+            if (BC_Name == VAR_CA_EDGE_BC || BC_Name == VAR_CA_MOM_BC) {
               ssnormal[p] = BC_Types[bc_input_id].BC_Data_Float[p + 5];
             } else {
               ssnormal[p] = BC_Types[bc_input_id].u_BC[3 + p];
@@ -399,7 +400,8 @@ int apply_integrated_curve_bc(
                          fv->dstangent_dx[1], ielem, elem_edge_bc->edge_elem_node_id, ielem_dim,
                          (int)elem_edge_bc->num_nodes_on_edge, clnormal, dclnormal_dx, exo);
 
-          if (BC_Types[bc_input_id].BC_Name == VAR_CA_EDGE_BC) {
+          if (BC_Types[bc_input_id].BC_Name == VAR_CA_EDGE_BC ||
+              BC_Types[bc_input_id].BC_Name == VAR_CA_MOM_BC) {
             fapply_var_CA(func, d_func, d_func_ss, fsnormal, dfsnormal_dx, ssnormal, dssnormal_dx,
                           clnormal, dclnormal_dx, BC_Types[bc_input_id].BC_Data_Float, x_dot, theta,
                           delta_t);

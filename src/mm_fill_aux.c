@@ -2172,7 +2172,7 @@ void calc_CL_normal(double snormal[DIM],
   int dim = elem_dim;
   char err_msg[MAX_CHAR_IN_INPUT];
   if (dim < 3)
-    GOMA_EH(GOMA_ERROR, "VAR_CA_EDGE invalid for 2D simulations ");
+    GOMA_EH(GOMA_ERROR, "VAR_CA_EDGE and VAR_CA_MOM are invalid for 2D simulations ");
 
   clnormal[0] = snormal[1] * tangent[2] - snormal[2] * tangent[1];
   clnormal[1] = snormal[2] * tangent[0] - snormal[0] * tangent[2];

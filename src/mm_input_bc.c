@@ -1521,6 +1521,7 @@ void rd_bc_specs(FILE *ifp, char *input) {
        */
 
     case VAR_CA_EDGE_BC:
+    case VAR_CA_MOM_BC:
     case VELO_THETA_TPL_BC:
     case VELO_THETA_HOFFMAN_BC:
     case VELO_THETA_COX_BC:
@@ -3712,7 +3713,7 @@ static int BC_consistency(struct Boundary_Condition *BC_Type) {
     }
   }
 
-  if (!strcmp(BC_Type->desc->name1, "VAR_CA_EDGE")) {
+  if (!strcmp(BC_Type->desc->name1, "VAR_CA_EDGE") || !strcmp(BC_Type->desc->name1, "VAR_CA_MOM")) {
     /*
      * Normalize substrate normal vector
      */
